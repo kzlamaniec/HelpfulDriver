@@ -9,13 +9,14 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const usersRef = firebase.firestore().collection('Users');
 
-//document.getElementById('loginG').addEventListener('click', GoogleLogin)
-//document.getElementById('loginF').addEventListener('click', FacebookLogin)
+document.getElementById('loginG').addEventListener('click', GoogleLogin)
+document.getElementById('loginF').addEventListener('click', FacebookLogin)
 
 var provider1 = new firebase.auth.GoogleAuthProvider()
 var provider2 = new firebase.auth.FacebookAuthProvider()
+
+const usersRef = firebase.firestore().collection('Users');
 
 
 function register(){
@@ -31,9 +32,7 @@ function register(){
 
   firebase.auth().createUserWithEmailAndPassword(emailr, passr)
   .then((userCredential) => {
-      sessionStorage.setItem('uid', `${userCredential.user.uid}`);
 
-      window.location.assign('/front/2_main/index.html');
 
       usersRef
       .doc(`${userCredential.user.uid}`)
@@ -42,6 +41,10 @@ function register(){
           uid: userCredential.user.uid,
           email: emailr
       
+      })
+      .then(() => {
+        window.location.assign('/front/2_main/index.html');
+        sessionStorage.setItem('uid', `${userCredential.user.uid}`);
       })
 
   })
@@ -64,11 +67,9 @@ function login(){
     firebase.auth().signInWithEmailAndPassword(elog, plog)
   .then((userCredential) => {
     // Signed in
-    UID = userCredential.user.uid;
-
     var user = userCredential.user;
-
     window.location.assign('/front/2_main/index.html');
+    sessionStorage.setItem('uid', `${userCredential.user.uid}`);
     // ...
   })
   .catch((error) => {
@@ -82,10 +83,8 @@ function login(){
   });
 }
 
-
 function GoogleLogin(){
     firebase.auth().signInWithPopup(provider1).then((userCredential) => {
-      sessionStorage.setItem('uid', `${userCredential.user.uid}`);
 
       var user = firebase.auth().currentUser;
       
@@ -97,9 +96,10 @@ function GoogleLogin(){
           email: user.email
       
       })
-
+      .then(() => {
       window.location.assign('/front/2_main/index.html');
-
+      sessionStorage.setItem('uid', `${userCredential.user.uid}`);
+      })
   })
     .catch(error => {
       console.error(error);
@@ -108,7 +108,6 @@ function GoogleLogin(){
 
 function FacebookLogin(){
     firebase.auth().signInWithPopup(provider2).then((userCredential) => {
-      sessionStorage.setItem('uid', `${userCredential.user.uid}`);
 
       var user = firebase.auth().currentUser;
       
@@ -120,23 +119,13 @@ function FacebookLogin(){
           email: user.email
       
       })
-
-      window.location.assign('/front/2_main/index.html');
+      .then(() => {
+        window.location.assign('/front/2_main/index.html');
+        sessionStorage.setItem('uid', `${userCredential.user.uid}`);
+      })
 
   })
     .catch(error => {
       console.error(error);
     })
   }
-
-function logOut(){
-    
-    firebase.auth().signOut().then(() => {
-      window.location.assign('../../index.html');
-      sessionStorage.clear();
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-}
-

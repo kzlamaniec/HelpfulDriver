@@ -10,3 +10,13 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   const usersRef = firebase.firestore().collection('Users');
+
+  function logOut(){
+    
+    firebase.auth().signOut().then(() => {
+      window.location.assign('../../index.html');
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+}

@@ -8,7 +8,6 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     var vv_destination = document.getElementById("destinationId").value;
     var vd_when = document.getElementById("dateId").value;
     var by_car = document.getElementById("inlineRadio1");
-    var on_foot = document.getElementById("inlineRadio2");
     var vv_how;
 
     if (by_car.checked){
@@ -48,13 +47,12 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     });
   }
 
-function add_trip_and_go_home(){
+  function add_trip_and_go_home(){
 
     var vv_from = document.getElementById("fromId").value;
     var vv_destination = document.getElementById("destinationId").value;
     var vd_when = document.getElementById("dateId").value;
     var by_car = document.getElementById("inlineRadio1");
-    var on_foot = document.getElementById("inlineRadio2");
     var vv_how;
 
     if (by_car.checked){

@@ -52,7 +52,7 @@
           <form class="form_addTrip">
             <div class="form-group">
               <label class="formTitle" for="from">Your name</label>
-              <input type="text" class="form-control" id="fromId" aria-describedby="fromHelp">
+              <input type="text" class="form-control" id="nameId" aria-describedby="fromHelp">
               <small id="fromHelp" class="form-text text-muted">Write your full name.</small>
             </div>
             <div class="checkBtns">
@@ -76,7 +76,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btnSave">Save</button>
+            <button type="button" onclick="update_profile()" class="btn btnSave">Save</button>
 
             <!-- <div class="formBtns">
               <div class="row row-eq-height justify-content-around">
@@ -94,5 +94,10 @@
       </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="../../src/logout.js"></script>
+    <script src="../../src/profile.js"></script>
   </body>
 </html>

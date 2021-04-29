@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanko</title>
+
+</head>
+
+<body>
+    <center>Witam :)</center>
+        <input type="email" placeholder="Email..." id="email_reg" />
+        <input type="password" placeholder="Password..." id="password_reg" />
+        <input type="password" placeholder="Password again..." id="password_reg2" />
+
+        <button onclick="login()">Logowanie</button>
+        <button onclick="register()">Rejestracja</button><br>
+
+        <button onclick="GoogleLogin()" id='loginG'>Zaloguj przez Google</button><br>
+        <button onclick="FacebookLogin()" id='loginF'>Zaloguj przez Facebook</button><br>
+
+
+
+        
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+<script src="src/login.js"></script>
+</body>
+
+</html>

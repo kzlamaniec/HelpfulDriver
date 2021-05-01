@@ -1,7 +1,6 @@
 var UID = sessionStorage.getItem('uid');
 
-const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
-
+//dane from when i to trzeba bedzie przekazać do sessionStorage - żeby użyc w zapytaniu o companów
   function add_trip_and_search(){
 
     var vv_from = document.getElementById("fromId").value;
@@ -17,6 +16,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     }
     tripsRef
     .add({
+        uid: UID,
         from: vv_from,
         to: vv_destination,
         when: firebase.firestore.Timestamp.fromDate(new Date(vd_when)),
@@ -27,19 +27,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
         console.log(UID);
         console.log("Trip successfully added!", docRef.id);
 
-        usersRef
-        .doc(`${UID}`)
-        .update({
-            trip: firebase.firestore.FieldValue.arrayUnion(firebase.firestore().doc(`Trips/${docRef.id}`))
-        })
-        .then(() => {
-            console.log("User updated!", UID);
-            window.location.assign('../4_companions/index.html');
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+        window.location.assign('../4_companions/index.html');
     })
     .catch((error) => {
         // The document probably doesn't exist.
@@ -62,6 +50,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     }
     tripsRef
     .add({
+        uid: UID,
         from: vv_from,
         to: vv_destination,
         when: firebase.firestore.Timestamp.fromDate(new Date(vd_when)),
@@ -72,19 +61,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
         console.log(UID);
         console.log("Trip successfully added!", docRef.id);
 
-        usersRef
-        .doc(`${UID}`)
-        .update({
-            trip: firebase.firestore.FieldValue.arrayUnion(firebase.firestore().doc(`Trips/${docRef.id}`))
-        })
-        .then(() => {
-            console.log("User updated!", UID);
-            window.location.assign('../2_main/index.html');
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+        window.location.assign('../2_main/index.html');
     })
     .catch((error) => {
         // The document probably doesn't exist.

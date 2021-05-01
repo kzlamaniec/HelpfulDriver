@@ -61,8 +61,8 @@ function register(){
 
 function login(){
 
-    var elog = document.getElementById("email_reg").value;
-    var plog = document.getElementById("password_reg").value;
+    var elog = document.getElementById("email_log").value;
+    var plog = document.getElementById("password_log").value;
 
     firebase.auth().signInWithEmailAndPassword(elog, plog)
   .then((userCredential) => {

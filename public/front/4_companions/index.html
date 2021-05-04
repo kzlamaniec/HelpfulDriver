@@ -19,7 +19,7 @@
           <div class="dashboard">
             <div class="row">
               <div class="col-4">
-                <button type="button" id="dashboardSignOutBtn"
+                <button onclick="logOut()" type="button" id="dashboardSignOutBtn"
                 class="btn btn-outline-danger animation mb-2 mb-md-0">
                   <i class="fas fa-sign-out-alt"></i>
                 </button>
@@ -51,13 +51,13 @@
 
           <div class="row">
             <div class="col-12">
-              <table class="mb-3">
+              <table class="mb-3" id="companions_table">
                 <tr>
                   <th>Name</th>
                   <th>Mobility</th>
                   <th>Chat</th>
                 </tr>
-                <tr>
+                <!--tr>
                   <td data-row="from">Klaudia</td>
                   <td data-row="to">
                     <i class="fas fa-car"></i>
@@ -89,11 +89,10 @@
                       <i class="fas fa-comments"></i>
                     </a>
                   </td>
-                </tr>
+                </tr-->
               </table>
             </div>
           </div>
-
         </div>
       </div>
     </div>

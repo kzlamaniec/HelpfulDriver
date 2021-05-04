@@ -8,7 +8,6 @@ tripsRef.where("uid", "==", `${UID}`).orderBy("when").limit(3)
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //console.log(doc.id, " => ", doc.data());
-        //var trip = doc.data();
         var i =+ 1;
         var from = doc.get("from");
         var to = doc.get("to");

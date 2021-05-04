@@ -5,7 +5,7 @@ var UID = sessionStorage.getItem('uid');
 
     var vv_from = document.getElementById("fromId").value;
     var vv_destination = document.getElementById("destinationId").value;
-    var vd_when = document.getElementById("dateId").value;
+    var vd_when = firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("dateId").value));
     var by_car = document.getElementById("inlineRadio1");
     var vv_how;
 
@@ -19,13 +19,18 @@ var UID = sessionStorage.getItem('uid');
         uid: UID,
         from: vv_from,
         to: vv_destination,
-        when: firebase.firestore.Timestamp.fromDate(new Date(vd_when)),
+        when: vd_when,
         how: vv_how,
     
     })
     .then((docRef) => {
-        console.log(UID);
+        //console.log(vd_when.toDate().toLocaleDateString());
         console.log("Trip successfully added!", docRef.id);
+
+        sessionStorage.setItem('from', `${vv_from}`);
+        sessionStorage.setItem('to', `${vv_destination}`);
+        sessionStorage.setItem('when', `${vd_when.toDate().toLocaleDateString()}`);
+        sessionStorage.setItem('how', `${vv_how}`);
 
         window.location.assign('../4_companions/index.html');
     })

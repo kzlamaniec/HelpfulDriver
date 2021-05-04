@@ -4,6 +4,7 @@ usersRef.doc(`${UID}`).get()
 .then((doc) => {
     if (doc.exists) {
         console.log("Document data:", doc.data());
+        document.getElementById("nameId").defaultValue = doc.get("name");
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");

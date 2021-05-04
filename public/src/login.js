@@ -15,6 +15,7 @@ document.getElementById('loginF').addEventListener('click', FacebookLogin)
 
 var provider1 = new firebase.auth.GoogleAuthProvider()
 var provider2 = new firebase.auth.FacebookAuthProvider()
+var patt1 = /.+(?=@)/;
 
 const usersRef = firebase.firestore().collection('Users');
 
@@ -24,6 +25,7 @@ function register(){
   var emailr = document.getElementById("email_reg").value;
   var passr = document.getElementById("password_reg").value;
   var passr2 = document.getElementById("password_reg2").value;
+  var default_name = emailr.match(patt1);
 
   if (passr !== passr2) {
     window.alert("Password eror");
@@ -39,7 +41,8 @@ function register(){
       .set({
 
           uid: userCredential.user.uid,
-          email: emailr
+          email: emailr,
+          name: default_name[0]
       
       })
       .then(() => {
@@ -61,8 +64,8 @@ function register(){
 
 function login(){
 
-    var elog = document.getElementById("email_reg").value;
-    var plog = document.getElementById("password_reg").value;
+    var elog = document.getElementById("email_log").value;
+    var plog = document.getElementById("password_log").value;
 
     firebase.auth().signInWithEmailAndPassword(elog, plog)
   .then((userCredential) => {
@@ -87,13 +90,16 @@ function GoogleLogin(){
     firebase.auth().signInWithPopup(provider1).then((userCredential) => {
 
       var user = firebase.auth().currentUser;
+      var emailg = user.email;
+      var default_name = emailg.match(patt1);
       
       usersRef
       .doc(`${userCredential.user.uid}`)
       .set({
 
           uid: userCredential.user.uid,
-          email: user.email
+          email: emailg,
+          name: default_name[0]
       
       })
       .then(() => {
@@ -110,13 +116,16 @@ function FacebookLogin(){
     firebase.auth().signInWithPopup(provider2).then((userCredential) => {
 
       var user = firebase.auth().currentUser;
+      var emailf = user.email;
+      var default_name = emailf.match(patt1);
       
       usersRef
       .doc(`${userCredential.user.uid}`)
       .set({
 
           uid: userCredential.user.uid,
-          email: user.email
+          email: emailf,
+          name: default_name[0]
       
       })
       .then(() => {

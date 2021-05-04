@@ -1,8 +1,25 @@
 var UID = sessionStorage.getItem('uid');
 
+usersRef.doc(`${UID}`).get()
+.then((doc) => {
+    if (doc.exists) {
+        console.log("Document data:", doc.data());
+        document.getElementById("nameId").defaultValue = doc.get("name");
+        var dl =  doc.get("driving_license")
+        if(dl == true){
+            document.getElementById("checkLicense").checked = true;
+        }
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
 function update_profile(){
     var vv_name = document.getElementById("nameId").value;
-    var car = document.getElementById("inlineRadio1");
+    var car = document.getElementById("checkLicense");
     var vb_license;
 
     if (car.checked){

@@ -10,6 +10,7 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   const usersRef = firebase.firestore().collection('Users');
+  const tripsRef = firebase.firestore().collection('Trips');
 
   function logOut(){
     

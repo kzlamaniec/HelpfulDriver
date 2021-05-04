@@ -1,12 +1,11 @@
 var UID = sessionStorage.getItem('uid');
 
-const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
-
+//dane from when i to trzeba bedzie przekazać do sessionStorage - żeby użyc w zapytaniu o companów
   function add_trip_and_search(){
 
     var vv_from = document.getElementById("fromId").value;
     var vv_destination = document.getElementById("destinationId").value;
-    var vd_when = document.getElementById("dateId").value;
+    var vd_when = firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("dateId").value));
     var by_car = document.getElementById("inlineRadio1");
     var vv_how;
 
@@ -17,29 +16,23 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     }
     tripsRef
     .add({
+        uid: UID,
         from: vv_from,
         to: vv_destination,
-        when: firebase.firestore.Timestamp.fromDate(new Date(vd_when)),
+        when: vd_when,
         how: vv_how,
     
     })
     .then((docRef) => {
-        console.log(UID);
+        //console.log(vd_when.toDate().toLocaleDateString());
         console.log("Trip successfully added!", docRef.id);
 
-        usersRef
-        .doc(`${UID}`)
-        .update({
-            trip: firebase.firestore.FieldValue.arrayUnion(firebase.firestore().doc(`Trips/${docRef.id}`))
-        })
-        .then(() => {
-            console.log("User updated!", UID);
-            window.location.assign('../4_companions/index.html');
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+        sessionStorage.setItem('from', `${vv_from}`);
+        sessionStorage.setItem('to', `${vv_destination}`);
+        sessionStorage.setItem('when', `${vd_when.toDate().toLocaleDateString()}`);
+        sessionStorage.setItem('how', `${vv_how}`);
+
+        window.location.assign('../4_companions/index.html');
     })
     .catch((error) => {
         // The document probably doesn't exist.
@@ -62,6 +55,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
     }
     tripsRef
     .add({
+        uid: UID,
         from: vv_from,
         to: vv_destination,
         when: firebase.firestore.Timestamp.fromDate(new Date(vd_when)),
@@ -72,19 +66,7 @@ const tripsRef = usersRef.doc(`${UID}`).collection('Trips');
         console.log(UID);
         console.log("Trip successfully added!", docRef.id);
 
-        usersRef
-        .doc(`${UID}`)
-        .update({
-            trip: firebase.firestore.FieldValue.arrayUnion(firebase.firestore().doc(`Trips/${docRef.id}`))
-        })
-        .then(() => {
-            console.log("User updated!", UID);
-            window.location.assign('../2_main/index.html');
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+        window.location.assign('../2_main/index.html');
     })
     .catch((error) => {
         // The document probably doesn't exist.

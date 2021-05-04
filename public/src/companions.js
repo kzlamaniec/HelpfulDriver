@@ -24,12 +24,19 @@ tripsRef.where("from", "==", `${yt_from}`).where("to", "==", `${yt_to}`)
                 console.log(user.id, " => ", user.data());
                 var i =+ 1;
                 var how = trip.get("how");
-                var name = user.get("name");   
+                var name = user.get("name");
+                var license =  user.get("driving_license") 
+                if(license == true){
+                    license = "Yes"
+                }else{
+                    license == "No"
+                }
 
                 var row = companions_table.insertRow(i);
                 var t_name = row.insertCell(0);
                 var t_to = row.insertCell(1);
-                var t_chat = row.insertCell(2).appendChild(document.createElement('a'));
+                var t_license = row.insertCell(2);
+                var t_chat = row.insertCell(3).appendChild(document.createElement('a'));
                 t_name.innerHTML = name;
                 if(how == "by car"){
                     t_to.appendChild(document.createElement('i')).classList.add("fas", "fa-car"); 
@@ -37,6 +44,7 @@ tripsRef.where("from", "==", `${yt_from}`).where("to", "==", `${yt_to}`)
                     t_to.appendChild(document.createElement('i')).classList.add("fas", "fa-shoe-prints"); 
                 }
                 t_chat.setAttribute("href", "#");
+                t_license.innerHTML = license;
                 t_chat.appendChild(document.createElement('i')).classList.add("fas", "fa-comments");         
             });
         }

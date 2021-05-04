@@ -4,12 +4,12 @@
   "description": "autostop",
   "icons": [
     {
-      "src":   "img/1.png",
+      "src":   "src/img/1.png",
       "type":  "image/png",
       "sizes": "180x180"
     },
     {
-      "src":   "img/2.png",
+      "src":   "src/img/2.png",
       "type":  "image/png",
       "sizes": "417x417"
     }
